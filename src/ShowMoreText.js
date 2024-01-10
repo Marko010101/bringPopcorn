@@ -25,7 +25,7 @@ export default function App() {
         foot on the moon or when rovers were sent to roam around on Mars.
       </TextExpander>
 
-      <TextExpander chooceExpanded={true} className="box">
+      <TextExpander expanded={true} className="box">
         Space missions have given us incredible insights into our universe and
         have inspired future generations to keep reaching for the stars. Space
         travel is a pretty cool thing to think about. Who knows what we'll
@@ -36,33 +36,35 @@ export default function App() {
 }
 
 function TextExpander({
-  children,
-  chooceExpanded,
-  collapsedNumWords = 20,
+  collapsedNumWords = 10,
   expandButtonText = "Show more",
   collapseButtonText = "Show less",
-  buttonColor = "blue",
-  className = "",
+  buttonColor = "#1f09cd",
+  expanded = false,
+  className,
+  children,
 }) {
-  const [expanded, setExpanded] = useState(chooceExpanded);
+  const [isExpanded, setIsExpanded] = useState(expanded);
 
-  const words = children.split(" ");
-  const displayText = expanded
+  const displayText = isExpanded
     ? children
-    : `${words.slice(0, collapsedNumWords).join(" ")}...`;
+    : children.split(" ").slice(0, collapsedNumWords).join(" ") + "...";
+
+  const buttonStyle = {
+    background: "none",
+    border: "none",
+    font: "inherit",
+    cursor: "pointer",
+    marginLeft: "6px",
+    color: buttonColor,
+  };
 
   return (
-    <div className={`${className} flex`}>
-      <p>
-        {displayText}
-        <button
-          className="btn"
-          onClick={() => setExpanded(!expanded)}
-          style={{ color: buttonColor }}
-        >
-          {expanded ? collapseButtonText : expandButtonText}
-        </button>
-      </p>
+    <div className={className}>
+      <span>{displayText}</span>
+      <button onClick={() => setIsExpanded((exp) => !exp)} style={buttonStyle}>
+        {isExpanded ? collapseButtonText : expandButtonText}
+      </button>
     </div>
   );
 }

@@ -13,11 +13,3 @@ body {
   border-radius: 7px;
   background-color: #f7f7f7;
 }
-.flex {
-  display: flex;
-}
-.btn {
-  border: none;
-  background-color: inherit;
-  /* justify-content: end; */
-}
