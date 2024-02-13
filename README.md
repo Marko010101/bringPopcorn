@@ -31,9 +31,17 @@ The states include:
 ### Effects
 
 - `useEffect` for fetching movies:
+
   - Fetches movies from the OMDb API based on the search query.
   - Handles errors and updates state accordingly.
   - Aborts the fetch request if the component unmounts or if a new query is triggered.
+
+  ## Watched Movies Storage
+
+In this application, the watched movies list is stored in the local storage using the `useEffect` hook. Here's how it works:
+
+- Initially, the watched movies list is retrieved from the local storage using the `useState` hook with a callback function to parse the stored JSON.
+- Whenever the watched movies list (`watched`) changes, the `useEffect` hook updates the local storage to reflect the latest state.
 
 ## Functionality
 
