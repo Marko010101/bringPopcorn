@@ -1,7 +1,16 @@
-export function useMovies() {
+import { useState, useEffect } from "react";
+
+const KEY = `34b9b8f7`;
+
+export function useMovies(query) {
+  const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+
   useEffect(
     function () {
       const controller = new AbortController();
+      // callback?.();
 
       async function fetchMovies() {
         try {
@@ -35,7 +44,7 @@ export function useMovies() {
         setError("");
         return;
       }
-      handleCloseMovie();
+      // handleCloseMovie();
       fetchMovies();
 
       return function () {
@@ -44,4 +53,6 @@ export function useMovies() {
     },
     [query]
   );
+
+  return { movies, isLoading, error };
 }
